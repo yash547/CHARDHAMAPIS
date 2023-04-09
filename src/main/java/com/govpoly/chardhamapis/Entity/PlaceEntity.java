@@ -28,8 +28,11 @@ public class PlaceEntity {
     @Column(name = "Description")
     private String description;
 
-    @Column(name = "Location")
-    private String location;
+    @Column(name = "Latitute")
+    private String lat;
+
+    @Column(name = "Longitute")
+    private String longitute;
 
     @Column(name = "Images")
     private String images;

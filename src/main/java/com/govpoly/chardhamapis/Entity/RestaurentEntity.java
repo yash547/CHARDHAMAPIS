@@ -25,11 +25,13 @@ public class RestaurentEntity {
     
     @Column(name = "Description")
     private String description;
+        
     
+    @Column(name = "Latitute")
+    private String lat;
 
-    @Column(name = "Location")
-    private String location;
-    
+    @Column(name = "Longitute")
+    private String longitute;
 
     @Column(name = "Images")
     private String images;

@@ -8,6 +8,8 @@ import javax.persistence.Tuple;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.govpoly.chardhamapis.DTO.LoginDTO;
@@ -42,24 +44,36 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
     @Override
     public Object logIn(String emailId, String pass) {
 
-        // JSONObject json=new JSONObject();
+         JSONObject json=new JSONObject();
 
         List<Tuple> logData = this.registrationDao.logCrediential(emailId, pass);
 
-        ArrayList<LoginDTO> logList = new ArrayList<LoginDTO>();
+
+        if(logData.size()==0)
+        {
+		 	return new ResponseEntity<>(json.toString(), HttpStatus.NOT_FOUND);
+        }
+       // ArrayList<LoginDTO> logList = new ArrayList<LoginDTO>();
         // logList.clear();
 
         for (Tuple data : logData) {
-            LoginDTO logDTO = new LoginDTO();
 
-            logDTO.setId(data.get(0, Integer.class));
-            logDTO.setFullName(data.get(2, String.class));
-            logDTO.setEmailId(data.get(1, String.class));
-            logDTO.setMobileNo(data.get(3, String.class));
+        //    LoginDTO logDTO = new LoginDTO();
 
-            logList.add(logDTO);
+            json.put("id", data.get(0, Integer.class));
+            json.put("fullName", data.get(2, String.class));
+            json.put("emailId", data.get(1, String.class));
+            json.put("mobileNo", data.get(3, String.class));
+               
+
+            // logDTO.setId();
+            // logDTO.setFullName();
+            // logDTO.setEmailId();
+            // logDTO.setMobileNo();
+
+            //logList.add(logDTO);
         }
-        return logList;
+        return json.toString();
 
     }
 
