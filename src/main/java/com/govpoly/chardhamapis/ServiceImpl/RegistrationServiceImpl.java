@@ -3,6 +3,7 @@ package com.govpoly.chardhamapis.ServiceImpl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -19,7 +20,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.govpoly.chardhamapis.DTO.LoginDTO;
+import com.govpoly.chardhamapis.Dao.EmailIdOtpDao;
 import com.govpoly.chardhamapis.Dao.RegistrationDao;
+import com.govpoly.chardhamapis.Entity.EmailIdOtpEntity;
 import com.govpoly.chardhamapis.Entity.RegistrationEntity;
 import com.govpoly.chardhamapis.ServiceInterface.RegisServiceInterface;
 
@@ -36,6 +39,9 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private EmailIdOtpDao emailOtpDao;
 
     /**
      * it is used to create the account.
@@ -86,24 +92,55 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
 
     @Override
     public Object forgotPasswordByEmailId(String emailId) {
+        JSONObject json = new JSONObject();
 
         if (registrationDao.existsByEmailId(emailId)) {
 
-    // Generate the random password
-    Random generator = new Random();
-    int password = (generator.nextInt(999999));
-    String pass = String.format("%06d", password);
+            // Generate the random password
+            Random generator = new Random();
+            int password = (generator.nextInt(999999));
+            String pass = String.format("%06d", password);
+            String body = "OTP for CharDham Yatra " + pass;
+
+            if(emailOtpDao.existsByEmailId(emailId))
+            {
+                emailOtpDao.uEmailIdOtpEntity(emailId,pass);
+            }
+            else
+            {
+
+            /**
+             * Object created to store the email id and OTP 
+             */
+            EmailIdOtpEntity emailIdOtpEntity = new EmailIdOtpEntity();
+            emailIdOtpEntity.setEmailId(emailId);
+            emailIdOtpEntity.setOtp(pass);
             
-    String body="OTP for CharDham Yatra "+pass;
-            sendSimpleEmail(emailId,body);
-            return "OTP Send to Email ID";
+            /**
+             * Data store into the data base using jpa repository
+             */
+            emailOtpDao.save(emailIdOtpEntity);
+            }
+            /**
+             * sendSimpleEmail method call 
+             */
+            sendSimpleEmail(emailId, body);
+
+            json.put("message", "OTP Send Through Email ID");
+            json.put("status", "SUCCESS");
+
+            return new ResponseEntity<>(json.toString(), HttpStatus.OK);
         }
 
-        return "done";
+        json.put("message", "Email ID NOT FOUND");
+        json.put("status", "NOT FOUND");
+
+        return new ResponseEntity<>(json.toString(), HttpStatus.NOT_FOUND);
     }
 
     /**
      * it used to send the email for OTP verification.
+     * 
      * @param toEmail
      * @param body
      */
@@ -127,5 +164,6 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
         System.out.println("Mail Send...");
 
     }
+
 
 }

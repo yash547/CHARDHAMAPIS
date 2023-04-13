@@ -29,4 +29,6 @@ public interface RegistrationDao extends JpaRepository<RegistrationEntity,Intege
      * @return
      */
     boolean existsByEmailId(String emailId);
+
+
 }
