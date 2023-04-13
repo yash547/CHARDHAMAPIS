@@ -102,27 +102,24 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
             String pass = String.format("%06d", password);
             String body = "OTP for CharDham Yatra " + pass;
 
-            if(emailOtpDao.existsByEmailId(emailId))
-            {
-                emailOtpDao.uEmailIdOtpEntity(emailId,pass);
-            }
-            else
-            {
+            if (emailOtpDao.existsByEmailId(emailId)) {
+                emailOtpDao.uEmailIdOtpEntity(emailId, pass);
+            } else {
 
-            /**
-             * Object created to store the email id and OTP 
-             */
-            EmailIdOtpEntity emailIdOtpEntity = new EmailIdOtpEntity();
-            emailIdOtpEntity.setEmailId(emailId);
-            emailIdOtpEntity.setOtp(pass);
-            
-            /**
-             * Data store into the data base using jpa repository
-             */
-            emailOtpDao.save(emailIdOtpEntity);
+                /**
+                 * Object created to store the email id and OTP
+                 */
+                EmailIdOtpEntity emailIdOtpEntity = new EmailIdOtpEntity();
+                emailIdOtpEntity.setEmailId(emailId);
+                emailIdOtpEntity.setOtp(pass);
+
+                /**
+                 * Data store into the data base using jpa repository
+                 */
+                emailOtpDao.save(emailIdOtpEntity);
             }
             /**
-             * sendSimpleEmail method call 
+             * sendSimpleEmail method call
              */
             sendSimpleEmail(emailId, body);
 
@@ -165,5 +162,16 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
 
     }
 
+    @Override
+    public Object passwordUpdtByEmailId(String emailId, String password) {
+        JSONObject json = new JSONObject();
+
+        registrationDao.updtPasswordByEmailId(emailId, password);
+        json.put("message", "Password Changed ");
+        json.put("status", "SUCCESS");
+
+        return new ResponseEntity<>(json.toString(), HttpStatus.OK);
+
+    }
 
 }

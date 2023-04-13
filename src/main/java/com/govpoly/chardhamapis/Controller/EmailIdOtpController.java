@@ -14,7 +14,12 @@ public class EmailIdOtpController {
     @Autowired
     private EmailIdOtpServiceInterface emailIdOtpServiceInterface;
 
-
+/**
+ * it is used to verify the otp by email id.
+ * @param emailId
+ * @param Otp
+ * @return
+ */
     @GetMapping("/VerifyOtp")
     public Object verifyOtp(@RequestParam String emailId,@RequestParam String Otp) {
 
