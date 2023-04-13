@@ -12,4 +12,6 @@ public interface RegisServiceInterface {
 
     public Object logIn(String emailId,String pass);
 
+    public Object forgotPasswordByEmailId(String emailId);
+
 }

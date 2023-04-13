@@ -36,4 +36,17 @@ public class RegistrationController {
         return this.rServiceInterface.logIn(emailId, pass);
 
     }
+
+/**
+ * this controller is used to send the otp through email
+ * @param emailid
+ * @return
+ */
+    @GetMapping("/forgotPassword")
+    public Object forgotPasswordByEmailId(@RequestParam String emailid) {
+            return this.rServiceInterface.forgotPasswordByEmailId(emailid);
+    }
+
+
+
 }

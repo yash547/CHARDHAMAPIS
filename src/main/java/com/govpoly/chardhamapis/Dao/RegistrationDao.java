@@ -22,4 +22,11 @@ public interface RegistrationDao extends JpaRepository<RegistrationEntity,Intege
  */
     @Query(value  = "select * from registration_entity where registration_entity.email_id= :email and registration_entity.password= :pass",nativeQuery = true)
     List<Tuple> logCrediential(@Param("email") String email,@Param("pass") String pass);
+
+    /**
+     * this jpa method is used to check whether the email id is present or not.
+     * @param emailId
+     * @return
+     */
+    boolean existsByEmailId(String emailId);
 }
