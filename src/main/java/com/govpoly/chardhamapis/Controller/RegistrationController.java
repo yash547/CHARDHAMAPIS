@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,7 @@ public class RegistrationController {
     }
 
     /**
-     * this controller is used to send the otp through email
+     * this controller is used to send the otp through email.
      * 
      * @param emailid
      * @return
@@ -51,7 +52,7 @@ public class RegistrationController {
     }
 
     /**
-     * it is used to changed the password by email id 
+     * it is used to changed the password by email id.
      * @param emailId
      * @param password
      * @return
@@ -60,6 +61,18 @@ public class RegistrationController {
     public Object passwordUpdtByEmailId(@RequestParam String emailId,@RequestParam String password) {
 
         return this.rServiceInterface.passwordUpdtByEmailId(emailId, password);
+
+    }
+
+/**
+ * it is used to update the profile details.
+ * @param registrationEntity
+ * @return
+ */
+   @PutMapping("/updateProfile")    
+    public Object updateProfile(@RequestBody RegistrationEntity registrationEntity) {
+
+        return this.rServiceInterface.updateProfile(registrationEntity);
 
     }
 

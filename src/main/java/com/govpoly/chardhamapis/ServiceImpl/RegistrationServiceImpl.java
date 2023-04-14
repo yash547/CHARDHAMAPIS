@@ -174,4 +174,27 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
 
     }
 
+    @Override
+    public Object updateProfile(RegistrationEntity registrationEntity) {
+        JSONObject json = new JSONObject();
+
+        Optional<RegistrationEntity> rOptional=this.registrationDao.findById(registrationEntity.getId());
+
+        RegistrationEntity regUpdateEntity=rOptional.get();
+
+        regUpdateEntity.setEmailId(registrationEntity.getEmailId());
+
+        regUpdateEntity.setFullName(registrationEntity.getFullName());
+
+        regUpdateEntity.setMobileNo(registrationEntity.getMobileNo());
+
+        this.registrationDao.save(regUpdateEntity);
+
+        json.put("message", "Profile Updated");
+        json.put("status", "SUCCESS");
+
+        return new ResponseEntity<>(json.toString(), HttpStatus.OK);
+
+    }
+
 }

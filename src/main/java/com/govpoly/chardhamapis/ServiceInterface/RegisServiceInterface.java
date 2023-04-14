@@ -15,5 +15,8 @@ public interface RegisServiceInterface {
     public Object forgotPasswordByEmailId(String emailId);
     
     public Object passwordUpdtByEmailId(String emailId,String password);
+
+
+    public Object updateProfile(RegistrationEntity registrationEntity);
     
 }
