@@ -1,8 +1,15 @@
 package com.govpoly.chardhamapis.ServiceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Tuple;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.govpoly.chardhamapis.DTO.PlaceDTO;
 import com.govpoly.chardhamapis.Dao.PlaceDao;
 import com.govpoly.chardhamapis.Entity.PlaceEntity;
 import com.govpoly.chardhamapis.ServiceInterface.PlaceServiceInterface;
@@ -26,9 +33,28 @@ public class PlaceServiceImpl implements PlaceServiceInterface {
      * it is used to fetch the list of place
      */
     @Override
-    public Object getPlaceList() {
+    public Object getPlaceList(String names) {
+
+        List<Tuple> placeData= placedao.getPlaceByName(names);
+        
+ArrayList<PlaceDTO> pArrayList=new ArrayList<>();
+pArrayList.clear();
+        for(Tuple tuple:placeData)
+        {
+                 PlaceDTO placeDTO=new PlaceDTO();
+                 placeDTO.setId(tuple.get(0, Integer.class));
+                 placeDTO.setName(tuple.get(3, String.class));
+                 placeDTO.setDescription(tuple.get(1, String.class));
+                 placeDTO.setImages(tuple.get(2, String.class));
+                 placeDTO.setLat(tuple.get(4, String.class));
+                 placeDTO.setLongitute(tuple.get(5, String.class));
+
+                 pArrayList.add(placeDTO);
+        }
+
     
-        return this.placedao.findAll();
+        //return this.placedao.findAll();
+      return pArrayList;
     }
 
     /**
