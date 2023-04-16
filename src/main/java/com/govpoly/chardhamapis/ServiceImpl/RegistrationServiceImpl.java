@@ -50,6 +50,34 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
     public Object createAccount(RegistrationEntity rEntity) {
 
         this.registrationDao.save(rEntity);
+        
+            /**
+             * sendSimpleEmail method call
+             */
+            String body = "<p>Dear "+rEntity.getFullName()+" ,</p>" +
+                      "<p>Thank you for your interest in the CharDham app. To start your journey to the holy shrines, please create your account by following the steps below:</p>" +
+                      "<ol>" +
+                      "<li>Download the CharDham app from the Google Play Store.</li>" +
+                      "<li>Tap on the \"Create Account\" button on the login screen.</li>" +
+                      "<li>Enter your personal details, including your name, email address, and phone number.</li>" +
+                      "<li>Choose a secure password and confirm it.</li>" +
+                      "<li>Tap on the \"Create Account\" button.</li>" +
+                      "</ol>" +
+                      "<p>Once you have created your account, you will be able to explore the app's features, including:</p>" +
+                      "<ul>" +
+                      "<li>Information on the four holy shrines of CharDham</li>" +
+                      "<ul>" +
+                      "<li>Char Dham Yatra Guide: A comprehensive guide to the Char Dham Yatra, including information on the four holy shrines (Yamunotri, Gangotri, Kedarnath, and Badrinath), the route to each shrine, and important tips for travellers.</li>" +
+                      "<li>Other Places to Visit: Information on other popular tourist destinations in Uttarakhand, including scenic hill stations, adventure sports destinations, and cultural and historical sites.</li>" +
+                      "<li>Maps and Navigation: Interactive maps with GPS navigation to help tourists find their way to the Char Dham shrines and other places of interest in Uttarakhand.</li>" +
+                      "<li>Accommodation and Food: A list of recommended hotels, guesthouses, and restaurants in the region, with information on prices, amenities, and contact details.</li>" +
+                      "<li>Emergency Services: A directory of emergency services, including hospitals, police stations, and rescue services, to help tourists in case of any emergency</li>" +
+                      "</ul>" +
+                      "</ul>" +
+                      "<p>If you have any questions or concerns, please don't hesitate to contact us at <a href=\"mailto:yashmishra547@gmail.com\">yashmishra547@gmail.com</a></p>" +
+                      "<p>Thank you,<br>The CharDham App Team</p>";
+
+            sendSimpleEmail(rEntity.getEmailId(), body,"Create your CharDham account");
         return "Data Inserted";
     }
 
@@ -121,7 +149,7 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
             /**
              * sendSimpleEmail method call
              */
-            sendSimpleEmail(emailId, body);
+            sendSimpleEmail(emailId, body,"Char Dham Yatra OTP Crediential");
 
             json.put("message", "OTP Send Through Email ID");
             json.put("status", "SUCCESS");
@@ -141,14 +169,14 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
      * @param toEmail
      * @param body
      */
-    public void sendSimpleEmail(String toEmail, String body) {
+    public void sendSimpleEmail(String toEmail, String body,String suject) {
 
         MimeMessage messages = mailSender.createMimeMessage();
 
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(messages, true);
-            helper.setSubject("Char Dham Yatra OTP Crediential");
+            helper.setSubject(suject);
             helper.setFrom("yashmishra547@gmail.com");
             helper.setTo(toEmail);
             helper.setText(body, true);

@@ -35,4 +35,9 @@ public class RestaurentEntity {
 
     @Column(name = "Images")
     private String images;
+
+    @Column(name = "PlaceName")
+    private String placename;
+
+    
 }

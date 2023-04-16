@@ -10,6 +10,6 @@ public interface RestaurentServiceInterface {
 
     public Object createRestaurent(RestaurentEntity rsEntity);
 
-    public Object getRestaurentList();
+    public Object getRestaurentList(String names);
 
 }
