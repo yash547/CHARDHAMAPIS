@@ -74,7 +74,7 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
                       "<li>Emergency Services: A directory of emergency services, including hospitals, police stations, and rescue services, to help tourists in case of any emergency</li>" +
                       "</ul>" +
                       "</ul>" +
-                      "<p>If you have any questions or concerns, please don't hesitate to contact us at <a href=\"mailto:yashmishra547@gmail.com\">yashmishra547@gmail.com</a></p>" +
+                      "<p>If you have any questions or concerns, please don't hesitate to contact us at <a href=\"mailto:krutikajaiswal724@gmail.com\">krutikajaiswal724@gmail.com</a></p>" +
                       "<p>Thank you,<br>The CharDham App Team</p>";
 
             sendSimpleEmail(rEntity.getEmailId(), body,"Create your CharDham account");
@@ -177,7 +177,7 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
         try {
             helper = new MimeMessageHelper(messages, true);
             helper.setSubject(suject);
-            helper.setFrom("yashmishra547@gmail.com");
+            helper.setFrom("krutikajaiswal724@gmail.com");
             helper.setTo(toEmail);
             helper.setText(body, true);
         } catch (MessagingException e) {

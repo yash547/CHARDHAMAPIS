@@ -43,7 +43,7 @@ pArrayList.clear();
         {
                  PlaceDTO placeDTO=new PlaceDTO();
                  placeDTO.setId(tuple.get(0, Integer.class));
-                 placeDTO.setName(tuple.get(3, String.class));
+                 placeDTO.setName(tuple.get(6, String.class)); // it is used to display the context of place_name column.
                  placeDTO.setDescription(tuple.get(1, String.class));
                  placeDTO.setImages(tuple.get(2, String.class));
                  placeDTO.setLat(tuple.get(4, String.class));
@@ -53,7 +53,7 @@ pArrayList.clear();
         }
 
     
-        //return this.placedao.findAll();
+        
       return pArrayList;
     }
 

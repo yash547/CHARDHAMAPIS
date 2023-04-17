@@ -36,4 +36,7 @@ public class PlaceEntity {
 
     @Column(name = "Images")
     private String images;
+    
+    @Column(name = "PlaceName")
+    private String placename;
 }
