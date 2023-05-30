@@ -1,6 +1,5 @@
 package com.govpoly.chardhamapis.ServiceImpl;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.govpoly.chardhamapis.DTO.FeeBackListDTO;
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
->>>>>>> e8ac33e6ab09b7684444fd98d80ce9e3ad560ec7
 import com.govpoly.chardhamapis.Dao.FeedBackDao;
 import com.govpoly.chardhamapis.Entity.FeedBackEntity;
 import com.govpoly.chardhamapis.ServiceInterface.FeedBackServiceInterface;
@@ -30,7 +27,6 @@ public class FeedBAckServiceImpl implements FeedBackServiceInterface{
         
         return this.feedBackDao.save(feeBackEntity);
     }
-<<<<<<< HEAD
 
     @Override
     public Object getFeedback() {
@@ -52,7 +48,5 @@ fArrayList.clear();
       return fArrayList;
       
     }
-=======
->>>>>>> e8ac33e6ab09b7684444fd98d80ce9e3ad560ec7
     
 }

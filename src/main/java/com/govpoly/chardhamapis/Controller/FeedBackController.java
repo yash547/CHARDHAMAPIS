@@ -1,10 +1,7 @@
 package com.govpoly.chardhamapis.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
-=======
->>>>>>> e8ac33e6ab09b7684444fd98d80ce9e3ad560ec7
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +20,6 @@ public class FeedBackController {
 
         return this.feeInterface.createFeedBack(feeBackEntity);
     }
-<<<<<<< HEAD
 
 
     
@@ -31,6 +27,4 @@ public class FeedBackController {
     public Object getFeedback() {
 return this.feeInterface.getFeedback();
     }
-=======
->>>>>>> e8ac33e6ab09b7684444fd98d80ce9e3ad560ec7
 }
