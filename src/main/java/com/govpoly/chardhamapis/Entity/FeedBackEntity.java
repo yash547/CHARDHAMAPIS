@@ -24,8 +24,11 @@ public class FeedBackEntity {
     @Column(name = "FeedBack")
     private String feedback;
 
+<<<<<<< HEAD
     @Column(name ="Rating")
     private String rating;
 
+=======
+>>>>>>> e8ac33e6ab09b7684444fd98d80ce9e3ad560ec7
    
 }
