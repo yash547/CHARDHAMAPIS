@@ -34,6 +34,16 @@ import com.govpoly.chardhamapis.ServiceInterface.RegisServiceInterface;
 @Service
 public class RegistrationServiceImpl implements RegisServiceInterface {
 
+    // JPA --- java persistant api 
+    /**
+
+RegistrationDao interface create.
+
+
+the above interface object is created.
+with the help @Autowired annotation.
+
+    **/
     @Autowired
     private RegistrationDao registrationDao;
 
@@ -49,6 +59,9 @@ public class RegistrationServiceImpl implements RegisServiceInterface {
     @Override
     public Object createAccount(RegistrationEntity rEntity) {
 
+        // here the data is store into the database.
+        // with the help of .save() method because this method call from 
+        // JPA interface which extended into the registratioDao interface.
         this.registrationDao.save(rEntity);
         
             /**
